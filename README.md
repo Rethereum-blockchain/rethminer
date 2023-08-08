@@ -4,7 +4,6 @@
 
 ## Features
 * NVIDIA CUDA mining v11.7.1
-* Remote API has been disabled
 
 ## Usage
 
