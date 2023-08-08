@@ -242,34 +242,34 @@ ApiServer::ApiServer(string address, int portnum, string password)
 
 void ApiServer::start()
 {
-    //// cnote << "ApiServer::start";
-    //if (m_portnumber == 0)
-    //    return;
+    // cnote << "ApiServer::start";
+    if (m_portnumber == 0)
+        return;
 
-    //tcp::endpoint endpoint(boost::asio::ip::address::from_string(m_address), m_portnumber);
+    tcp::endpoint endpoint(boost::asio::ip::address::from_string(m_address), m_portnumber);
 
-    //// Try to bind to port number
-    //// if exception occurs it may be due to the fact that
-    //// requested port is already in use by another service
-    //try
-    //{
-    //    m_acceptor.open(endpoint.protocol());
-    //    m_acceptor.set_option(boost::asio::ip::tcp::acceptor::reuse_address(true));
-    //    m_acceptor.bind(endpoint);
-    //    m_acceptor.listen(64);
-    //}
-    //catch (const std::exception&)
-    //{
-    //    cwarn << "Could not start API server on port: " +
-    //                 to_string(m_acceptor.local_endpoint().port());
-    //    cwarn << "Ensure port is not in use by another service";
-    //    return;
-    //}
+    // Try to bind to port number
+    // if exception occurs it may be due to the fact that
+    // requested port is already in use by another service
+    try
+    {
+        m_acceptor.open(endpoint.protocol());
+        m_acceptor.set_option(boost::asio::ip::tcp::acceptor::reuse_address(true));
+        m_acceptor.bind(endpoint);
+        m_acceptor.listen(64);
+    }
+    catch (const std::exception&)
+    {
+        cwarn << "Could not start API server on port: " +
+                     to_string(m_acceptor.local_endpoint().port());
+        cwarn << "Ensure port is not in use by another service";
+        return;
+    }
 
-    //cnote << "Api server listening on port " + to_string(m_acceptor.local_endpoint().port())
-    //      << (m_password.empty() ? "." : ". Authentication needed.");
-    //m_running.store(true, std::memory_order_relaxed);
-    //m_workThread = std::thread{boost::bind(&ApiServer::begin_accept, this)};
+    cnote << "Api server listening on port " + to_string(m_acceptor.local_endpoint().port())
+          << (m_password.empty() ? "." : ". Authentication needed.");
+    m_running.store(true, std::memory_order_relaxed);
+    m_workThread = std::thread{boost::bind(&ApiServer::begin_accept, this)};
 }
 
 void ApiServer::stop()

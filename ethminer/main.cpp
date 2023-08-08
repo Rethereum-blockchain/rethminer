@@ -24,11 +24,6 @@
 #define ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004
 #endif
 
-//Force API Core off
-#if API_CORE
-#undef API_CORE
-#endif
-
 #include <libethcore/Farm.h>
 #if ETH_ETHASHCL
 #include <libethash-cl/CLMiner.h>
