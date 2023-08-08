@@ -37,6 +37,7 @@ build.*/
 extdep/install
 extdep/download
 /cmake-build-*/
+.vs/
 
 *.pyc
 
@@ -74,3 +75,4 @@ node_modules/
 
 # vscode
 .vscode/
+.vs/ProjectSettings.json
