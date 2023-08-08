@@ -10,7 +10,7 @@
 The **rethminer** can be compiled using docker using our make file found in the repository. To build it for linux please run:
 
 ```sh
-docker build --no-cache -t ethb3miner-cuda .
+docker build --no-cache -t rethminer .
 ```
 
 ### More information
