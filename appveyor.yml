@@ -10,7 +10,6 @@ clone_depth: 100
 os: "Visual Studio 2017"
 environment:
   matrix:
-    - CUDA_VER: "8.0"
     - CUDA_VER: "9.1"
     - CUDA_VER: "10.0"
     - CUDA_VER: "11.7"
@@ -26,19 +25,15 @@ cache:
 # Download CUDA Windows installer (local) and extract /compiler/* to /CUDA/vX.0/ zip archive.
 install: |
   git submodule update --init --recursive
-  if "%CUDA_VER%" == "8.0" set CUDA_ARCHIVE=cuda_8.0.61_windows-exe
   if "%CUDA_VER%" == "9.1" set CUDA_ARCHIVE=cuda_9.1.85_windows
   if "%CUDA_VER%" == "10.0" set CUDA_ARCHIVE=cuda_10.0.130_411.31_windows
   if "%CUDA_VER%" == "11.7" set CUDA_ARCHIVE=cuda_11.7.0_516.01_windows
-  if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" NEQ "8.0" curl -L https://developer.nvidia.com/compute/cuda/%CUDA_VER%/Prod/local_installers/%CUDA_ARCHIVE% -o %CUDA_ARCHIVE%.exe)
-  if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" == "8.0" curl -L https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_windows-exe -o %CUDA_ARCHIVE%.exe)
+  if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" NEQ "11.7" curl -L https://developer.nvidia.com/compute/cuda/%CUDA_VER%/Prod/local_installers/%CUDA_ARCHIVE% -o %CUDA_ARCHIVE%.exe)
   if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" == "11.7" curl -L https://developer.download.nvidia.com/compute/cuda/11.7.0/local_installers/cuda_11.7.0_516.01_windows.exe -o %CUDA_ARCHIVE%.exe)
   if NOT EXIST C:\CUDA mkdir C:\CUDA
-  if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" NEQ "8.0" 7z x %CUDA_ARCHIVE%.exe -oC:\CUDA nvcc/* nvrtc*/*)
-  if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" == "8.0" 7z x %CUDA_ARCHIVE%.exe -oC:\CUDA compiler/* nvrtc*/*)
+  if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" NEQ "11.7" 7z x %CUDA_ARCHIVE%.exe -oC:\CUDA nvcc/* nvrtc*/*)
   if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" == "11.7" 7z x %CUDA_ARCHIVE%.exe -oC:\CUDA cuda_nvcc/* cuda_nvrtc*/*)
-  if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" NEQ "8.0" rename C:\CUDA\nvcc v%CUDA_VER%)
-  if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" == "8.0" rename C:\CUDA\compiler v%CUDA_VER%)
+  if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" NEQ "11.7" rename C:\CUDA\nvcc v%CUDA_VER%)
   if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" == "11.7" rename C:\CUDA\cuda_nvcc v%CUDA_VER%)
 
   set PATH=C:\Python36-x64;C:\Python36-x64\Scripts;%PATH%;C:\CUDA\v%CUDA_VER%\bin
