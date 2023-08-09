@@ -10,16 +10,13 @@ clone_depth: 100
 os: "Visual Studio 2017"
 environment:
   matrix:
-    - CUDA_VER: "9.1"
-    - CUDA_VER: "10.0"
+
     - CUDA_VER: "11.7"
   HUNTER_CACHE_TOKEN:
     secure: VnpF1MH5MEFvUI5MiMMMFlmbDdst+bfom5ZFVgalYPp/SYDhbejjXJm9Dla/IgpC
 
 cache:
-  - C:\CUDA\v8.0 -> appveyor.yml
-  - C:\CUDA\v9.1 -> appveyor.yml
-  - C:\CUDA\v10.0 -> appveyor.yml
+
   - C:\CUDA\v11.7 -> appveyor.yml
 
 # Download CUDA Windows installer (local) and extract /compiler/* to /CUDA/vX.0/ zip archive.
@@ -60,7 +57,7 @@ deploy:
   tag: $(appveyor_repo_tag_name)
   release: "$(project_name) $(project_version)"
   description: ""
-  force_update: true  # Force update in case Travis CI created the release before.
+  force_update: true  # Force update in case Travis CI created the release before
   prerelease: $(project_version_is_prerelease)
   draft: false
   artifact: ethminer
