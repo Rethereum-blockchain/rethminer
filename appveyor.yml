@@ -36,6 +36,7 @@ install: |
   if NOT EXIST C:\CUDA mkdir C:\CUDA
   if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" NEQ "8.0" 7z x %CUDA_ARCHIVE%.exe -oC:\CUDA nvcc/* nvrtc*/*)
   if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" == "8.0" 7z x %CUDA_ARCHIVE%.exe -oC:\CUDA compiler/* nvrtc*/*)
+  if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" == "11.7" 7z x %CUDA_ARCHIVE%.exe -oC:\CUDA cuda_nvcc/* cuda_nvrtc*/*)
   if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" NEQ "8.0" rename C:\CUDA\nvcc v%CUDA_VER%)
   if NOT EXIST C:\CUDA\v%CUDA_VER% (if "%CUDA_VER%" == "8.0" rename C:\CUDA\compiler v%CUDA_VER%)
 
