@@ -17,6 +17,8 @@ environment:
       CUVER: 11
     - CUDA_VER: "12.0.0"
       CUVER: 12
+    - CUDA_VER: "12.2.1"
+      CUVER: 12.2
   HUNTER_CACHE_TOKEN:
     secure: VnpF1MH5MEFvUI5MiMMMFlmbDdst+bfom5ZFVgalYPp/SYDhbejjXJm9Dla/IgpC
 
