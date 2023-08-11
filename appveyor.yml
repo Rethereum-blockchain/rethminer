@@ -17,6 +17,8 @@ environment:
       CUVER: 11
     - CUDA_VER: "12.0.0"
       CUVER: 12
+    - CUDA_VER: "12.2.1"
+      CUVER: 12.2
   HUNTER_CACHE_TOKEN:
     secure: VnpF1MH5MEFvUI5MiMMMFlmbDdst+bfom5ZFVgalYPp/SYDhbejjXJm9Dla/IgpC
 
@@ -35,7 +37,7 @@ install:
   - if "%CUDA_VER%" == "11.0.3" set CUDA_ARCHIVE=cuda_11.0.3_451.82_win10
   - if "%CUDA_VER%" == "11.1.0" set CUDA_ARCHIVE=cuda_11.1.0_456.43_win10
   - if "%CUDA_VER%" == "11.2.0" set CUDA_ARCHIVE=cuda_11.2.0_460.89_win10
-  - if "%CUDA_VER%" == "12.0.0" set CUDA_ARCHIVE=cuda_12.0.0_527.41_windows.exe
+  - if "%CUDA_VER%" == "12.0.0" set CUDA_ARCHIVE=cuda_12.0.0_527.41_windows
   - if "%CUDA_VER%" == "12.2.1" set CUDA_ARCHIVE=cuda_12.2.1_536.67_windows
   - if NOT EXIST C:\CUDA\v%CUDA_VER% (
       if "%CUDA_VER%" == "8.0" (
@@ -92,6 +94,6 @@ deploy:
   draft: false
   artifact: ethminer
   auth_token:
-    secure: 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
+    secure: uDRcvbW+9GIyKlZ9guJfWOQ6jg0An6eULg6mEkYgdKn/GVNpYSKvO5oHxP0U8a+e
   on:
     appveyor_repo_tag: true
